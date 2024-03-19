@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">windsock-cap</string>
+    <string name="title_activity_main">windsock-cap</string>
+    <string name="package_name">com.dmsapps.windsock2</string>
+    <string name="custom_url_scheme">com.dmsapps.windsock2</string>
+</resources>
