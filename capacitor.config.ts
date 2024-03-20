@@ -2,11 +2,10 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.dmsapps.windsock2',
-  appName: 'windsock-cap',
+  appName: 'Windsock 2',
   webDir: 'dist',
   server: {
-    url: 'http://192.168.1.107:5173/',
-    cleartext: true
+    androidScheme: 'https'
   },
   plugins: {
     extConfig: {},

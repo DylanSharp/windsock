@@ -17,7 +17,7 @@ export default function TabbarPage() {
         "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
     return (
         <Page>
-            <Navbar title="Tabbar"/>
+            <Navbar title="Tabbar - Updated 0.0.4"/>
             <Tabbar labels={isTabbarLabels} icons={isTabbarIcons} className="left-0 bottom-0 fixed">
                 <TabbarLink
                     active={activeTab === 'tab-1'}
