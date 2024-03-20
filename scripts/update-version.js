@@ -16,19 +16,11 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 packageJson.version = newVersion;
 fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
 
-// Update iOS version - Adjusted for CURRENT_PROJECT_VERSION
-const iosPlistPath = './ios/App/App.xcodeproj/project.pbxproj';
-const iosPlistData = fs.readFileSync(iosPlistPath, 'utf8');
-const iosPlistObj = plist.parse(iosPlistData);
-
-Object.keys(iosPlistObj.objects).forEach(key => {
-    const obj = iosPlistObj.objects[key];
-    if (obj.buildSettings && obj.buildSettings.CURRENT_PROJECT_VERSION) {
-        iosPlistObj.objects[key].buildSettings.CURRENT_PROJECT_VERSION = newVersion;
-    }
-});
-
-fs.writeFileSync(iosPlistPath, plist.build(iosPlistObj));
+// Update iOS version (CURRENT_PROJECT_VERSION in project.pbxproj)
+const iosPbxprojPath = './ios/App/App.xcodeproj/project.pbxproj';
+let iosPbxproj = fs.readFileSync(iosPbxprojPath, 'utf8');
+iosPbxproj = iosPbxproj.replace(/CURRENT_PROJECT_VERSION = \d+\.\d+\.\d+;/g, `CURRENT_PROJECT_VERSION = ${newVersion};`);
+fs.writeFileSync(iosPbxprojPath, iosPbxproj);
 
 // Update Android version
 const androidBuildGradlePath = './android/app/build.gradle';
