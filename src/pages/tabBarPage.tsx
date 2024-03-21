@@ -9,7 +9,6 @@ export default function TabbarPage() {
     const [isTabbarLabels, setIsTabbarLabels] = useState(true);
     const [isTabbarIcons, setIsTabbarIcons] = useState(false);
 
-
     const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
         "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
         "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " +
@@ -17,7 +16,7 @@ export default function TabbarPage() {
         "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
     return (
         <Page>
-            <Navbar title="Tabbar - 1.0.0"/>
+            <Navbar title="Tabbar - 1.0.1"/>
             <Tabbar labels={isTabbarLabels} icons={isTabbarIcons} className="left-0 bottom-0 fixed">
                 <TabbarLink
                     active={activeTab === 'tab-1'}
