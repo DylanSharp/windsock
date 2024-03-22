@@ -46,7 +46,6 @@ export const getGwxData = async () => {
             lastUpdated: row[6],
         };
     });
-    console.log(JSON.stringify({output}, null, 2));
 
     return weatherDataSerializer(output);
 };

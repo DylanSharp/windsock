@@ -26,7 +26,10 @@ Deno.serve(async (req) => {
         }
 
         const location = locations?.[0]
-        console.log('Got location:', location)
+        if (!location) {
+            console.log('No location found for:', row.originalLocation);
+            continue;
+        }
 
         // Get the most recent weather data for the location and ensure this is a new datapoint
         const {data: existingData, error: existingDataError} = await supabaseClient
@@ -40,17 +43,23 @@ Deno.serve(async (req) => {
         if (existingDataError) {
             errors.push(existingDataError)
         }
+        if (existingData) {
+            const prevLastUpdated = existingData[0]?.last_updated;
+            const currentLastUpdated = row.lastUpdated;
+            const prevTime = new Date(prevLastUpdated).getTime();
+            const currentTime = new Date(currentLastUpdated).getTime();
 
-        if (existingData && existingData[0]?.last_updated === row.lastUpdated) {
-            console.log('Data already exists for this location and time:', row.lastUpdated);
-            continue;
+            if (prevTime == currentTime) {
+                console.log('Data already exists for this location and time:', row.lastUpdated);
+                continue;
+            }
         }
 
         // If the data point is new, insert it.
         if (location) {
-            console.log('Inserting data for location:', location.uuid);
+
             // Insert the data into the database
-            let newRow = [{
+            const newRow = [{
                 location_uuid: location.uuid,
                 windspeed_ave: row.windSpeedAve,
                 windspeed_max: row.windSpeedMax,
@@ -59,15 +68,14 @@ Deno.serve(async (req) => {
                 temp: row.temp,
                 last_updated: row.lastUpdated,
             }];
-            console.log('Inserting:', newRow);
-            const {data, error} = await supabaseClient
+
+            const {error} = await supabaseClient
                 .from('weather_data')
                 .insert(newRow)
                 .select()
 
             errors.push(error)
         }
-
     }
 
 
