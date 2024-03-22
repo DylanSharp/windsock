@@ -1,11 +1,11 @@
-import {List, ListItem, Navbar} from "konsta/react";
+import {List, ListItem, Navbar, Page} from "konsta/react";
 import useLocations from "../hooks/use-locations.ts";
 
 
-const Home = () => {
+const HomePage = () => {
     const locations = useLocations();
     return (
-        <div>
+        <Page>
             <Navbar title="Home"/>
             <List>
                 {locations && locations.map((location: Location) => {
@@ -22,7 +22,7 @@ const Home = () => {
                     )
                 })}
             </List>
-        </div>
+        </Page>
     )
 }
-export default Home;
+export default HomePage;

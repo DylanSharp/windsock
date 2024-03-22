@@ -48,7 +48,6 @@ const useLocations = () => {
 
     const handleWeatherDataInserts = (payload) => {
         const newDataPoint = payload.new;
-        console.log('Got new weather data', newDataPoint)
         setLocations((prevLocations) => {
             return prevLocations.map((location: Location) => {
                 if (location.uuid === newDataPoint.location_uuid) {

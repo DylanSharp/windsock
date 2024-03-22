@@ -15,13 +15,15 @@
     "@capacitor/ios": "^5.7.3",
     "@capgo/capacitor-updater": "^5.7.14",
     "@supabase/supabase-js": "^2.39.8",
+    "@tanstack/react-query": "^5.28.6",
     "framework7-icons": "^5.0.5",
     "framework7-react": "^8.3.2",
     "ionicons": "^7.2.2",
     "konsta": "^3.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^5.0.1"
+    "react-icons": "^5.0.1",
+    "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
     "@capacitor/assets": "^3.0.4",

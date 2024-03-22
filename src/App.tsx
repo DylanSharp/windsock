@@ -1,10 +1,8 @@
 import './App.css'
-import Layout from "./pages/Layout.tsx";
 import {KonstaProvider} from "konsta/react";
 import {Capacitor,} from "@capacitor/core";
-import {CapacitorUpdater} from '@capgo/capacitor-updater'
+import TabLayout from "./routes/TabLayout.tsx";
 
-CapacitorUpdater.notifyAppReady()
 
 export default function MyApp() {
     const platform = Capacitor.getPlatform();
@@ -13,7 +11,7 @@ export default function MyApp() {
     return (
         <>
             <KonstaProvider theme={theme}>
-                <Layout/>
+                <TabLayout/>
             </KonstaProvider>
         </>
     );
