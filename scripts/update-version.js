@@ -17,10 +17,10 @@ packageJson.version = newVersion;
 fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
 
 // Update iOS version (CURRENT_PROJECT_VERSION in project.pbxproj)
-const iosPbxprojPath = './ios/App/App.xcodeproj/project.pbxproj';
-let iosPbxproj = fs.readFileSync(iosPbxprojPath, 'utf8');
-iosPbxproj = iosPbxproj.replace(/CURRENT_PROJECT_VERSION = \d+\.\d+\.\d+;/g, `CURRENT_PROJECT_VERSION = ${newVersion};`);
-fs.writeFileSync(iosPbxprojPath, iosPbxproj);
+// const iosPbxprojPath = './ios/App/App.xcodeproj/project.pbxproj';
+// let iosPbxproj = fs.readFileSync(iosPbxprojPath, 'utf8');
+// iosPbxproj = iosPbxproj.replace(/CURRENT_PROJECT_VERSION = \d+\.\d+\.\d+;/g, `CURRENT_PROJECT_VERSION = ${newVersion};`);
+// fs.writeFileSync(iosPbxprojPath, iosPbxproj);
 
 // Update Android version
 const androidBuildGradlePath = './android/app/build.gradle';

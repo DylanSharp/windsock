@@ -1,5 +1,17 @@
 import {useState} from 'react';
-import {Block, Icon, Page, Tabbar, TabbarLink,} from 'konsta/react';
+import {
+    Block,
+    Icon,
+    Navbar,
+    Page,
+    Tabbar,
+    TabbarLink,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+} from 'konsta/react';
 import {MdEmail, MdFileUpload, MdToday} from 'react-icons/md';
 import Home from "./Home.tsx";
 
@@ -41,23 +53,64 @@ export default function Layout() {
                 <Home/>
             )}
             {activeTab === 'tab-2' && (
-                <Block strong inset className="space-y-4">
-                    <p
-                        className={"text-2xl"}
-                    >Tab 2</p>
-                    <p>
-                        <span>{loremIpsum}</span>
-                    </p>
-                    <p>
-                        <span>{loremIpsum}</span>
-                    </p>
-                </Block>
+                <>
+                    <Navbar title="Table"/>
+                    <div className="block overflow-x-auto mt-8">
+                        <Table>
+                            <TableHead>
+                                <TableRow header>
+                                    <TableCell header>Dessert (100g serving)</TableCell>
+                                    <TableCell header className="text-right">
+                                        Calories
+                                    </TableCell>
+                                    <TableCell header className="text-right">
+                                        Fat (g)
+                                    </TableCell>
+                                    <TableCell header className="text-right">
+                                        Carbs
+                                    </TableCell>
+                                    <TableCell header className="text-right">
+                                        Protein (g)
+                                    </TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell>Frozen yogurt</TableCell>
+                                    <TableCell className="text-right">159</TableCell>
+                                    <TableCell className="text-right">6.0</TableCell>
+                                    <TableCell className="text-right">24</TableCell>
+                                    <TableCell className="text-right">4.0</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>Ice cream sandwich</TableCell>
+                                    <TableCell className="text-right">237</TableCell>
+                                    <TableCell className="text-right">9.0</TableCell>
+                                    <TableCell className="text-right">37</TableCell>
+                                    <TableCell className="text-right">4.4</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>Eclair</TableCell>
+                                    <TableCell className="text-right">262</TableCell>
+                                    <TableCell className="text-right">16.0</TableCell>
+                                    <TableCell className="text-right">24</TableCell>
+                                    <TableCell className="text-right">6.0</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>Cupcake</TableCell>
+                                    <TableCell className="text-right">305</TableCell>
+                                    <TableCell className="text-right">3.7</TableCell>
+                                    <TableCell className="text-right">67</TableCell>
+                                    <TableCell className="text-right">4.3</TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </div>
+                </>
             )}
             {activeTab === 'tab-3' && (
                 <Block strong inset className="space-y-4">
-                    <p
-                        className={"text-2xl"}
-                    >Tab 3</p>
+                    <p className={"text-2xl"}>Tab 3</p>
                     <p>
                         <span>{loremIpsum}</span>
                     </p>
