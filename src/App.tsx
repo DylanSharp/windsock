@@ -1,5 +1,5 @@
 import './App.css'
-import TabbarPage from "./pages/tabBarPage.tsx";
+import Layout from "./pages/Layout.tsx";
 import {KonstaProvider} from "konsta/react";
 import {Capacitor,} from "@capacitor/core";
 import {CapacitorUpdater} from '@capgo/capacitor-updater'
@@ -13,7 +13,7 @@ export default function MyApp() {
     return (
         <>
             <KonstaProvider theme={theme}>
-                <TabbarPage/>
+                <Layout/>
             </KonstaProvider>
         </>
     );

@@ -14,6 +14,7 @@
     "@capacitor/core": "^5.7.3",
     "@capacitor/ios": "^5.7.3",
     "@capgo/capacitor-updater": "^5.7.14",
+    "@supabase/supabase-js": "^2.39.8",
     "framework7-icons": "^5.0.5",
     "framework7-react": "^8.3.2",
     "ionicons": "^7.2.2",

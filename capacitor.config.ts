@@ -4,8 +4,12 @@ const config: CapacitorConfig = {
   appId: 'com.dmsapps.windsock2',
   appName: 'Windsock 2',
   webDir: 'dist',
+  // server: {
+  //   androidScheme: 'https'
+  // },
   server: {
-    androidScheme: 'https'
+    url: 'http://192.168.1.103:5173/',
+    cleartext: true
   },
   plugins: {
     extConfig: {},
