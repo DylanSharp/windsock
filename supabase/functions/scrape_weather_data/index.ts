@@ -1,7 +1,7 @@
 import {createClient} from 'https://esm.sh/@supabase/supabase-js@2'
 import {getGwxData} from './scraper.ts'
 
-Deno.serve(async (req) => {
+Deno.serve(async () => {
 
     const supabaseClient = createClient(
         Deno.env.get('SUPABASE_URL') ?? '',
@@ -47,8 +47,10 @@ Deno.serve(async (req) => {
             const prevLastUpdated = existingData[0]?.last_updated;
             const currentLastUpdated = row.lastUpdated;
             const prevTime = new Date(prevLastUpdated).getTime();
-            const currentTime = new Date(currentLastUpdated).getTime();
-
+            let currentTime = null;
+            if (currentLastUpdated) {
+                currentTime = new Date(currentLastUpdated).getTime();
+            }
             if (prevTime == currentTime) {
                 console.log('Data already exists for this location and time:', row.lastUpdated);
                 continue;
