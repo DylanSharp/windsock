@@ -3,11 +3,13 @@ import useWeatherData from "../hooks/use-weather-data.ts";
 import useLocations from "../hooks/use-locations.ts";
 import {useEffect, useState} from "react";
 import {weatherDataPointSerializer} from "../utils/serializers.ts";
+import useConfig from "../hooks/use-config.ts";
 
 const HomePage = () => {
     const [locationsWithData, setLocationsWithData] = useState([]); // [1
     const {data: weatherData} = useWeatherData();
     const {data: locations} = useLocations();
+    const {getLocationDisplayStatus} = useConfig();
 
     useEffect(() => {
         if (!locations || !weatherData) {
@@ -28,6 +30,9 @@ const HomePage = () => {
             <Navbar title="Home"/>
             <List>
                 {locationsWithData && locationsWithData.map((location) => {
+                    if (!getLocationDisplayStatus(location.uuid)) {
+                        return null;
+                    }
                     return (
                         <ListItem
                             key={location.uuid}
