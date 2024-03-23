@@ -8,7 +8,6 @@ const useWeatherData = () => {
     const queryClient = useQueryClient();
 
     const handleWeatherDataInserts = (payload) => {
-        console.log('handleWeatherDataInserts', payload)
         const currentData = queryClient.getQueryData([WEATHER_DATA_QUERY_KEY]);
         if (currentData) {
             queryClient.setQueryData([WEATHER_DATA_QUERY_KEY], (oldData) => {
@@ -46,7 +45,7 @@ const useWeatherData = () => {
         queryKey: ['weather_data'],
         queryFn: async () => {
             const result = await supabase
-                .from('most_recent_weather_data')
+                .from('weather_data')
                 .select('*');
             return result.data;
         },
