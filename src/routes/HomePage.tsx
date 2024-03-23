@@ -1,23 +1,23 @@
 import {List, ListItem, Navbar, Page} from "konsta/react";
-import useLocations from "../hooks/use-locations.ts";
-
+import useWeatherData from "../hooks/use-weather-data.ts";
 
 const HomePage = () => {
-    const locations = useLocations();
+    const {data} = useWeatherData();
+
     return (
         <Page>
             <Navbar title="Home"/>
             <List>
-                {locations && locations.map((location: Location) => {
-                    return location && location.weatherData && (
+                {data && data.map((dataPoint) => {
+                    return data && (
                         <ListItem
-                            key={location.uuid}
+                            key={dataPoint.uuid}
                             link
                             chevronMaterial={false}
-                            title={location.name}
-                            after={`${location.weatherData?.dir_mag}°`}
-                            subtitle={`${location.weatherData?.windspeed_ave} km/h`}
-                            text={location.weatherData?.dir_true}
+                            title={dataPoint.location_name}
+                            after={`${dataPoint?.dir_mag}°`}
+                            subtitle={`${dataPoint?.windspeed_ave} km/h`}
+                            text={dataPoint?.dir_true}
                         />
                     )
                 })}
