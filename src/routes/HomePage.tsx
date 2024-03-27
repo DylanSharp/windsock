@@ -1,10 +1,12 @@
-import {List, ListItem, Navbar, Page} from "konsta/react";
+import {Card, List, Navbar, Page} from "konsta/react";
 import useWeatherData from "../hooks/use-weather-data.ts";
 import useLocations from "../hooks/use-locations.ts";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {weatherDataPointSerializer} from "../utils/serializers.ts";
 import useConfig from "../hooks/use-config.ts";
 import {Link} from "react-router-dom";
+import {FaLocationArrow} from "react-icons/fa";
+import NoWindIcon from "../icons/NoWindIcon.tsx";
 
 const HomePage = () => {
     const [locationsWithData, setLocationsWithData] = useState([]); // [1
@@ -28,21 +30,58 @@ const HomePage = () => {
 
     return (
         <Page>
-            <Navbar title="Home"/>
+            <Navbar
+                title={(
+                    <h1>Windsock</h1>
+                )}
+                centerTitle={true}
+            />
             <List>
                 {locationsWithData && locationsWithData.map((location) => {
                     if (!getLocationDisplayStatus(location.uuid)) {
                         return null;
                     }
+                    const degToRotate = parseInt(location.data?.dir_mag_unformatted) - 45;
+                    const degIsNumber = !isNaN(degToRotate);
                     return (
-                        <ListItem
+                        <Card
                             key={location.uuid}
-                            link
-                            chevronMaterial={true}
-                            title={location.name}
-                            subtitle={`${location.data?.windspeed_ave}`}
-                            text={location.data?.dir_true}
-                        />
+                        >
+                            <div
+                                className={"flex justify-between"}
+                            >
+                                <div
+                                    className={"flex flex-col items-start space-y-1"}
+                                >
+                                    <p
+                                        className="text-md font-semibold"
+                                    >{location.name}</p>
+                                    <p
+                                        className={"pl-2"}
+                                    >{location.data?.temp}°C</p>
+                                    <p
+                                        className="bg-slate-600 text-white rounded-full px-2 py-1"
+                                    >{location.data?.windspeed_ave}</p>
+                                </div>
+                                <div
+                                    className={"flex items-center px-5"}
+                                >
+                                    {degIsNumber ? (
+                                        <div
+                                            className="flex flex-col items-center"
+                                        >
+                                            <FaLocationArrow
+                                                className={`${location.name}:: text-gray-800 h-9 w-9 transform rotate-[${degToRotate}deg]`}
+                                            />
+                                            <p>{location.data?.dir_mag}</p>
+                                        </div>
+                                    ) : (
+                                        <NoWindIcon
+                                        />
+                                    )}
+                                </div>
+                            </div>
+                        </Card>
                     )
                 })}
             </List>
