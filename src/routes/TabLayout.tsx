@@ -20,8 +20,8 @@ export default function TabLayout() {
                     }
                 />
                 <TabbarLink
-                    active={location.pathname === '/table'}
-                    onClick={() => navigate('table')}
+                    active={location.pathname === '/settings'}
+                    onClick={() => navigate('settings')}
                     icon={
                         <Icon material={<TbSettingsCheck className="w-7 h-7"/>}/>
                     }

@@ -24,7 +24,7 @@ const router = createBrowserRouter([
                 element: <HomePage/>,
             },
             {
-                path: "table",
+                path: "settings",
                 element: <SettingsPage/>,
             },
         ],

@@ -4,6 +4,7 @@ import useLocations from "../hooks/use-locations.ts";
 import {useEffect, useState} from "react";
 import {weatherDataPointSerializer} from "../utils/serializers.ts";
 import useConfig from "../hooks/use-config.ts";
+import {Link} from "react-router-dom";
 
 const HomePage = () => {
     const [locationsWithData, setLocationsWithData] = useState([]); // [1
@@ -37,15 +38,25 @@ const HomePage = () => {
                         <ListItem
                             key={location.uuid}
                             link
-                            chevronMaterial={false}
+                            chevronMaterial={true}
                             title={location.name}
-                            after={`${location?.data?.dir_mag}`}
                             subtitle={`${location.data?.windspeed_ave}`}
                             text={location.data?.dir_true}
                         />
                     )
                 })}
             </List>
+            {/* If there are no locations selected to display, show a message. */}
+            {locationsWithData && locationsWithData.filter(location => getLocationDisplayStatus(location.uuid)).length === 0 && (
+                <
+                >
+                    <p
+                        className="text-center text-gray-500"
+                    >Please selected at least one location to display.</p>
+                    <Link to="/settings" className="text-blue-600">Go to settings Page</Link>
+                </>
+            )}
+
         </Page>
     )
 }
