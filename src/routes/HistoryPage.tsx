@@ -21,8 +21,6 @@ const HistoryPage = () => {
                     <div
                         className="flex text-white"
                     >
-                        {/*Back icon*/}
-
                         <button
                             className="flex items-center space-x-2 p-2 text-white"
                             onClick={() => history.back()}>

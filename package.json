@@ -1,13 +1,13 @@
 {
   "name": "windsock-cap",
   "private": true,
-  "version": "1.0.6",
+  "version": "1.0.7",
   "type": "module",
   "scripts": {
     "build": "vite build",
     "check-version": "node scripts/getCurrentVersion.js",
     "update-version": "node scripts/updateVersion.js",
-    "deploy": "npm run update-version && git commit -am \"Rev up to $npm_package_version\" && git tag $npm_package_version && git push --tags && vite build && npx cap sync && npx @capgo/cli bundle upload --channel production"
+    "deploy": "git commit -am \"Rev up to $npm_package_version\" && git tag $npm_package_version && git push --tags && vite build && npx cap sync && npx @capgo/cli bundle upload --channel production"
   },
   "dependencies": {
     "@capacitor/android": "^5.7.3",
