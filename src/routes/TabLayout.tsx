@@ -1,4 +1,4 @@
-import {Icon, Page, Tabbar, TabbarLink,} from 'konsta/react';
+import {Icon, Navbar, Page, Tabbar, TabbarLink,} from 'konsta/react';
 import {GiWindsock} from "react-icons/gi";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {TbSettingsCheck} from "react-icons/tb";

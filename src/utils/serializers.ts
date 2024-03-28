@@ -1,4 +1,4 @@
-const EMPTY_VAL_PLACEHOLDER = '?';
+const EMPTY_VAL_PLACEHOLDER = '-';
 
 export const weatherDataPointSerializer = (dataPoint: any) => {
     if (!dataPoint) {

@@ -9,6 +9,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import HomePage from "./routes/HomePage.tsx";
 import SettingsPage from "./routes/SettingsPage.tsx";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import HistoryPage from "./routes/HistoryPage.tsx";
 
 CapacitorUpdater.notifyAppReady();
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path: "settings",
                 element: <SettingsPage/>,
+            },
+            {
+                path: "history/:locationId",
+                element: <HistoryPage/>,
             },
         ],
     },

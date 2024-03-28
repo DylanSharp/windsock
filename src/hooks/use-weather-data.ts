@@ -42,7 +42,7 @@ const useWeatherData = () => {
     });
 
     return useQuery({
-        queryKey: ['weather_data'],
+        queryKey: [WEATHER_DATA_QUERY_KEY],
         queryFn: async () => {
             const result = await supabase
                 .from('weather_data')

@@ -20,9 +20,8 @@ const SettingsPage = () => {
                             <Toggle
                                 component="div"
                                 className="-my-1"
-                                checked={config.locations.find(loc => loc.uuid === location.uuid)?.display}
-                                onChange={() => toggleLocationDisplay(location.uuid)
-                                }
+                                checked={config.locations.find(loc => loc.uuid === location.uuid)?.display || false}
+                                onChange={() => toggleLocationDisplay(location.uuid)}
                             />
                         }
                     />))}

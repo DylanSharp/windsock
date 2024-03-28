@@ -4,7 +4,7 @@ import useLocations from "../hooks/use-locations.ts";
 import {useEffect, useState} from "react";
 import {weatherDataPointSerializer} from "../utils/serializers.ts";
 import useConfig from "../hooks/use-config.ts";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import NoWindIcon from "../icons/NoWindIcon.tsx";
 import WindsockIcon from "../icons/WindsockIcon.tsx";
 
@@ -13,6 +13,7 @@ const HomePage = () => {
     const {data: weatherData} = useWeatherData();
     const {data: locations} = useLocations();
     const {getLocationDisplayStatus} = useConfig();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!locations || !weatherData) {
@@ -28,6 +29,10 @@ const HomePage = () => {
         setLocationsWithData(newLocationData);
     }, [locations, weatherData]);
 
+    const navigateToHistoryPage = (location) => {
+        navigate(`/history/${location.uuid}`);
+    }
+
     return (
         <Page>
             <Navbar
@@ -36,7 +41,7 @@ const HomePage = () => {
                 )}
                 centerTitle={true}
                 bgClassName={"bg-[#0090cd] rounded-b-xl"}
-                titleClassName={"text-white text-3xl"}
+                titleClassName={"text-white text-2xl font-semibold"}
             />
             <List>
                 {locationsWithData && locationsWithData.map((location) => {
@@ -49,6 +54,7 @@ const HomePage = () => {
                         <Card
                             key={location.uuid}
                             className={"bg-[#dff4ff]"}
+                            onClick={() => navigateToHistoryPage(location)}
                         >
                             <div
                                 className={"flex justify-between"}
@@ -57,13 +63,13 @@ const HomePage = () => {
                                     className={"flex flex-col items-start space-y-1"}
                                 >
                                     <p
-                                        className="text-md font-semibold"
+                                        className="text-lg font-semibold"
                                     >{location.name}</p>
                                     <p
                                         className={"pl-2"}
                                     >{location.data?.temp}°C</p>
                                     <p
-                                        className="bg-slate-600 text-white rounded-full px-2 py-1"
+                                        className="bg-[#0090cd] text-white rounded-full px-2 py-1 font-bold"
                                     >{location.data?.windspeed_ave}</p>
                                 </div>
                                 <div
