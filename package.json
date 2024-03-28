@@ -16,6 +16,7 @@
     "@capgo/capacitor-updater": "^5.7.14",
     "@supabase/supabase-js": "^2.39.8",
     "@tanstack/react-query": "^5.28.6",
+    "date-fns": "^3.6.0",
     "framework7-icons": "^5.0.5",
     "framework7-react": "^8.3.2",
     "ionicons": "^7.2.2",

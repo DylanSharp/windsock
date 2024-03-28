@@ -2,11 +2,12 @@ import {useParams} from "react-router-dom";
 import useWeatherDataHistory from "../hooks/use-weather-data-history.ts";
 import {Card, Navbar, Page, Table} from "konsta/react";
 import {IoArrowBack} from "react-icons/io5";
+import {format} from "date-fns";
 
 const HistoryPage = () => {
     // Get the location ID from the route params
     const {locationId} = useParams();
-    const {data, serializedData} = useWeatherDataHistory(locationId);
+    const {serializedData} = useWeatherDataHistory(locationId);
     return (
         <Page>
             <Navbar
@@ -35,7 +36,8 @@ const HistoryPage = () => {
                 <Table>
                     <thead>
                     <tr>
-                        <th>Temperature (°C)</th>
+                        <th>Time</th>
+                        <th>Temp (°C)</th>
                         <th>Wind Speed</th>
                         <th>Wind Direction</th>
                     </tr>
@@ -43,9 +45,18 @@ const HistoryPage = () => {
                     <tbody>
                     {serializedData?.map((dataPoint) => (
                         <tr key={dataPoint.uuid}>
-                            <td>{dataPoint.temp}</td>
-                            <td>{dataPoint.windspeed_ave}</td>
-                            <td>{dataPoint.dir_mag}</td>
+                            <td
+                                className="text-center"
+                            >{format(new Date(dataPoint.last_updated), 'HH:mm')}</td>
+                            <td
+                                className="text-center"
+                            >{dataPoint.temp}</td>
+                            <td
+                                className="text-center"
+                            >{dataPoint.windspeed_ave}</td>
+                            <td
+                                className="text-center"
+                            >{dataPoint.dir_mag}</td>
                         </tr>
                     ))}
                     </tbody>
