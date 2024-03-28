@@ -1,12 +1,12 @@
 import {Card, List, Navbar, Page} from "konsta/react";
 import useWeatherData from "../hooks/use-weather-data.ts";
 import useLocations from "../hooks/use-locations.ts";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {weatherDataPointSerializer} from "../utils/serializers.ts";
 import useConfig from "../hooks/use-config.ts";
 import {Link} from "react-router-dom";
-import {FaLocationArrow} from "react-icons/fa";
 import NoWindIcon from "../icons/NoWindIcon.tsx";
+import WindsockIcon from "../icons/WindsockIcon.tsx";
 
 const HomePage = () => {
     const [locationsWithData, setLocationsWithData] = useState([]); // [1
@@ -70,13 +70,14 @@ const HomePage = () => {
                                         <div
                                             className="flex flex-col items-center"
                                         >
-                                            <FaLocationArrow
-                                                className={`${location.name}:: text-gray-800 h-9 w-9 transform rotate-[${degToRotate}deg]`}
+                                            <WindsockIcon
+                                                className={`${location.name}:: text-gray-800 h-12 w-12 transform rotate-[${degToRotate}deg]`}
                                             />
                                             <p>{location.data?.dir_mag}</p>
                                         </div>
                                     ) : (
                                         <NoWindIcon
+                                            className={"text-gray-800 h-12 w-12"}
                                         />
                                     )}
                                 </div>
