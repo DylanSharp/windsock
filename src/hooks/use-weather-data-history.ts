@@ -9,14 +9,15 @@ const useWeatherDataHistory = (locationId: string, limit: number = 100) => {
     const [serializedData, setSerializedData] = useState([]);
 
     const result = useQuery({
-        queryKey: [WEATHER_DATA_HISTORY_QUERY_KEY],
+        queryKey: [WEATHER_DATA_HISTORY_QUERY_KEY, locationId],
         queryFn: async () => {
             const result = await supabase
                 .from('weather_data')
                 .select('*')
                 .eq('location_uuid', locationId)
-                .order('last_updated', {ascending: false})
+                .order('created_at', {ascending: false})
                 .limit(limit);
+            console.log('Got new weather history data', result.data)
             return result.data;
         },
         staleTime: 1000 * 15, // 15 seconds
@@ -27,7 +28,7 @@ const useWeatherDataHistory = (locationId: string, limit: number = 100) => {
             return;
         }
         setSerializedData(result.data.map((dataPoint) => (weatherDataPointSerializer(dataPoint))));
-    }, []);
+    }, [result.data]);
 
     return {
         serializedData,

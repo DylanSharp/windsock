@@ -1,3 +1,5 @@
+import {format, sub} from "date-fns";
+
 const EMPTY_VAL_PLACEHOLDER = '-';
 
 export const weatherDataPointSerializer = (dataPoint: any) => {
@@ -21,5 +23,6 @@ export const weatherDataPointSerializer = (dataPoint: any) => {
         windspeed_ave: formatValue('windspeed_ave', ' km/h'),
         dir_true: formatValue('dir_true', ''),
         dir_mag_unformatted: dataPoint.dir_mag,
+        last_updated: format(sub(new Date(dataPoint.last_updated), {hours: 2}), 'HH:mm')
     };
 }

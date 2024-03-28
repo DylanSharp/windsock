@@ -2,20 +2,22 @@ import {useParams} from "react-router-dom";
 import useWeatherDataHistory from "../hooks/use-weather-data-history.ts";
 import {Card, Navbar, Page, Table} from "konsta/react";
 import {IoArrowBack} from "react-icons/io5";
-import {format} from "date-fns";
+import useLocations from "../hooks/use-locations.ts";
 
 const HistoryPage = () => {
-    // Get the location ID from the route params
     const {locationId} = useParams();
-    const {serializedData} = useWeatherDataHistory(locationId);
+    const {data: locations} = useLocations();
+    const locationName = locations?.find((location) => location.uuid === locationId)?.name;
+    const {serializedData, isLoading, isError} = useWeatherDataHistory(locationId);
     return (
         <Page>
             <Navbar
                 title={(
                     <h1>Windsock</h1>
                 )}
+                subtitle={locationName}
                 centerTitle={true}
-                bgClassName={"bg-primary-800 rounded-b-xl"}
+                bgClassName={"bg-primary-700 rounded-b-xl"}
                 titleClassName={"text-white text-2xl font-semibold"}
                 left={
                     <div
@@ -41,11 +43,21 @@ const HistoryPage = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {serializedData?.map((dataPoint) => (
+                    {isError && (
+                        <tr>
+                            <td colSpan={4} className="text-center">Error loading data</td>
+                        </tr>
+                    )}
+                    {isLoading && (
+                        <tr>
+                            <td colSpan={4} className="text-center">Loading...</td>
+                        </tr>
+                    )}
+                    {!isLoading && serializedData?.map((dataPoint) => (
                         <tr key={dataPoint.uuid}>
                             <td
                                 className="text-center"
-                            >{format(new Date(dataPoint.last_updated), 'HH:mm')}</td>
+                            >{dataPoint.last_updated}</td>
                             <td
                                 className="text-center"
                             >{dataPoint.temp}</td>

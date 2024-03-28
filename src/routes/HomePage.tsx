@@ -40,7 +40,7 @@ const HomePage = () => {
                     <h1>Windsock</h1>
                 )}
                 centerTitle={true}
-                bgClassName={"bg-primary-800 rounded-b-xl"}
+                bgClassName={"bg-primary-700 rounded-b-xl"}
                 titleClassName={"text-white text-2xl font-semibold"}
             />
             <List>
