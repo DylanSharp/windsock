@@ -35,6 +35,8 @@ const HomePage = () => {
                     <h1>Windsock</h1>
                 )}
                 centerTitle={true}
+                bgClassName={"bg-[#0090cd] rounded-b-xl"}
+                titleClassName={"text-white text-3xl"}
             />
             <List>
                 {locationsWithData && locationsWithData.map((location) => {
@@ -46,6 +48,7 @@ const HomePage = () => {
                     return (
                         <Card
                             key={location.uuid}
+                            className={"bg-[#dff4ff]"}
                         >
                             <div
                                 className={"flex justify-between"}
