@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "com.dmsapps.windsock2"
+    namespace "com.dmsapps.windsock"
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.dmsapps.windsock2"
+        applicationId "com.dmsapps.windsock"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 27

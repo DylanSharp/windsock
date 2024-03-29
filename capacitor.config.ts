@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.dmsapps.windsock2',
-  appName: 'Windsock 2',
+  appId: 'com.dmsapps.windsock',
+  appName: 'Windsock',
   webDir: 'dist',
   server: {
     androidScheme: 'https'

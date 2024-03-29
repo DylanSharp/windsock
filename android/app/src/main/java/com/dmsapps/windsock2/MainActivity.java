@@ -1,4 +1,4 @@
-package com.dmsapps.windsock2;
+package com.dmsapps.windsock;
 
 import com.getcapacitor.BridgeActivity;
 
