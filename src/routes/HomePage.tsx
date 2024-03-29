@@ -38,33 +38,25 @@ const HomePage = () => {
                             className={"bg-[#dff4ff]"}
                             onClick={() => navigateToHistoryPage(location)}
                         >
-                            <div
-                                className={"flex justify-between"}
-                            >
-                                <div
-                                    className={"flex flex-col items-start space-y-3"}
-                                >
-                                    <p
-                                        className="text-lg font-semibold"
-                                    >{location.name}
+                            <div className={"flex justify-between"}>
+                                <div className={"flex flex-col items-start space-y-3"}>
+                                    <p className="text-xl font-semibold">
+                                        {location.name}
                                         {/* Time ago */}
-                                        <span
-                                            className="text-sm text-gray-400 ml-2"
-                                        >{location.serializedData?.last_updated}</span>
+                                        <span className="text-sm text-gray-500 ml-2 font-light">
+                                            {location.serializedData?.last_updated}
+                                        </span>
                                     </p>
-                                    <p
-                                        className={"pl-2"}
-                                    >{location.serializedData?.temp}°C</p>
-                                    <div
-                                        className={"flex items-center space-x-2"}
-                                    >
-                                        <p
-                                            className="bg-primary-600 text-white rounded-full px-2 py-1 font-bold"
-                                        >{location.serializedData?.windspeed_ave}
+                                    <p className={"pl-2"}>
+                                        {location.serializedData?.temp}°C
+                                    </p>
+                                    <div className={"flex items-center space-x-2"}>
+                                        <p className="bg-primary-600 text-white rounded-full px-2 py-1 font-bold text-md">
+                                            {location.serializedData?.windspeed_ave}
                                         </p>
-                                        <p
-                                            className="text-gray-500 text-sm"
-                                        >Max {location.serializedData?.windspeed_max}</p>
+                                        <p className="text-gray-500 text-sm">
+                                            Max {location.serializedData?.windspeed_max}
+                                        </p>
                                     </div>
                                 </div>
                                 <div
@@ -72,13 +64,14 @@ const HomePage = () => {
                                 >
                                     {degIsNumber ? (
                                         <div
-                                            className="flex flex-col items-center"
+                                            className="flex flex-col items-center space-y-1"
                                         >
+                                            <p className="font-semibold">{location.serializedData?.dir_true}</p>
                                             <WindsockIcon
                                                 style={{transform: `rotate(${degToRotate}deg)`}}
                                                 className="text-gray-800 h-12 w-12"
                                             />
-                                            <p>{location.serializedData?.dir_mag}</p>
+                                            <p className="font-semibold">{location.serializedData?.dir_mag}</p>
                                         </div>
                                     ) : (
                                         <NoWindIcon
