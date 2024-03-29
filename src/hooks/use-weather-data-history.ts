@@ -17,7 +17,6 @@ const useWeatherDataHistory = (locationId: string, limit: number = 100) => {
                 .eq('location_uuid', locationId)
                 .order('created_at', {ascending: false})
                 .limit(limit);
-            console.log('Got new weather history data', result.data)
             return result.data;
         },
         staleTime: 1000 * 15, // 15 seconds

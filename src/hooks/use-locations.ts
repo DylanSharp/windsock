@@ -1,15 +1,32 @@
 import {supabase} from "../utils/supabase.ts";
 import {useQuery} from "@tanstack/react-query";
+import {weatherDataPointSerializer} from "../utils/serializers.ts";
 
 const useLocations = () => {
     return useQuery({
         queryKey: ['locations'],
         queryFn: async () => {
-            const result = await supabase
+            const {data} = await supabase
                 .from('locations')
-                .select('*')
-            return result.data
-        }
+                .select(`
+                    *,
+                    most_recent_weather_data(*) as data
+                `)
+
+            return data?.map(location => {
+                const mostRecentWeatherDatum = location.most_recent_weather_data[0];
+
+                // Remove the most_recent_weather_data key from the location object
+                delete location.most_recent_weather_data;
+
+                return ({
+                    ...location,
+                    data: mostRecentWeatherDatum,
+                    serializedData: weatherDataPointSerializer(mostRecentWeatherDatum),
+                });
+            });
+        },
+        staleTime: 1000 * 5, // 5 seconds
     });
 }
 export default useLocations;
