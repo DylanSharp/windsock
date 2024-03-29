@@ -1,7 +1,7 @@
 import './App.css'
 import {KonstaProvider} from "konsta/react";
 import {Capacitor} from "@capacitor/core";
-import { App } from '@capacitor/app';
+import {App} from '@capacitor/app';
 import TabLayout from "./routes/TabLayout.tsx";
 import useConfig from "./hooks/use-config.ts";
 import {useEffect} from "react";
@@ -20,14 +20,15 @@ export default function MyApp() {
 
     // Catch back button pressed and navigate back
     useEffect(() => {
-        console.log('Registering back button handler')
         const handler = () => {
-            navigate(-1);
+            // If current page can go back, navigate back, otherwise exit the app
+            if (['/', '/settings'].includes(location.pathname)) {
+                App.exitApp();
+            } else {
+                navigate(-1);
+            }
         };
-        const listener = App.addListener('backButton', handler);
-        return () => {
-            listener.remove();
-        };
+        App.addListener('backButton', handler);
     }, []);
 
 
