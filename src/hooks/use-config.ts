@@ -14,6 +14,7 @@ const useConfig = () => {
     const LOCAL_STORAGE_CONFIG_KEY = 'appConfig';
 
     const loadConfig = async () => {
+        setLoading(true)
         try {
             // Get the config from local storage but let remote locations take precedence.
             const storedConfig = JSON.parse(localStorage.getItem(LOCAL_STORAGE_CONFIG_KEY))
@@ -32,9 +33,9 @@ const useConfig = () => {
                 saveConfig({...storedConfig, locations: updatedLocations})
 
             } else {
-                setConfig(storedConfig || defaultConfig)
+                saveConfig(storedConfig || defaultConfig)
             }
-
+            setLoading(false)
         } catch (err) {
             setError(err)
             setLoading(false)
