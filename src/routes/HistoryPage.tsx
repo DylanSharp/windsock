@@ -3,6 +3,7 @@ import useWeatherDataHistory from "../hooks/use-weather-data-history.ts";
 import {Card, Navbar, Page, Table} from "konsta/react";
 import {IoArrowBack} from "react-icons/io5";
 import useLocations from "../hooks/use-locations.ts";
+import LoadingSpinner from "../components/LoadingSpinner.tsx";
 
 const HistoryPage = () => {
     const {locationId} = useParams();
@@ -33,44 +34,43 @@ const HistoryPage = () => {
                 }
             />
             <Card>
-                <Table>
-                    <thead>
-                    <tr>
-                        <th>Time</th>
-                        <th>Temp (°C)</th>
-                        <th>Wind Speed</th>
-                        <th>Wind Direction</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {isError && (
+                {isLoading ? (
+                    <LoadingSpinner/>
+                ) : (
+                    <Table>
+                        <thead>
                         <tr>
-                            <td colSpan={4} className="text-center">Error loading data</td>
+                            <th>Time</th>
+                            <th>Temp (°C)</th>
+                            <th>Wind Speed</th>
+                            <th>Wind Direction</th>
                         </tr>
-                    )}
-                    {isLoading && (
-                        <tr>
-                            <td colSpan={4} className="text-center">Loading...</td>
-                        </tr>
-                    )}
-                    {!isLoading && serializedData?.map((dataPoint) => (
-                        <tr key={dataPoint.uuid}>
-                            <td
-                                className="text-center"
-                            >{dataPoint.last_updated}</td>
-                            <td
-                                className="text-center"
-                            >{dataPoint.temp}</td>
-                            <td
-                                className="text-center"
-                            >{dataPoint.windspeed_ave}</td>
-                            <td
-                                className="text-center"
-                            >{dataPoint.dir_mag}</td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </Table>
+                        </thead>
+                        <tbody>
+                        {isError && (
+                            <tr>
+                                <td colSpan={4} className="text-center">Error loading data</td>
+                            </tr>
+                        )}
+                        {!isLoading && serializedData?.map((dataPoint) => (
+                            <tr key={dataPoint.uuid}>
+                                <td
+                                    className="text-center"
+                                >{dataPoint.last_updated}</td>
+                                <td
+                                    className="text-center"
+                                >{dataPoint.temp}</td>
+                                <td
+                                    className="text-center"
+                                >{dataPoint.windspeed_ave}</td>
+                                <td
+                                    className="text-center"
+                                >{dataPoint.dir_mag}</td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </Table>
+                )}
             </Card>
         </Page>
     )
