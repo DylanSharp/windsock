@@ -26,7 +26,7 @@ const useLocations = () => {
                 });
             });
         },
-        staleTime: 1000 * 5, // 5 seconds
+        refetchInterval: 1000 * 10, // Refetch every 10 seconds
     });
 }
 export default useLocations;

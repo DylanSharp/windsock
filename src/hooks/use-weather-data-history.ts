@@ -19,7 +19,7 @@ const useWeatherDataHistory = (locationId: string, limit: number = 100) => {
                 .limit(limit);
             return result.data;
         },
-        staleTime: 1000 * 15, // 15 seconds
+        refetchInterval: 1000 * 10, // Refetch every 10 seconds
     });
 
     useEffect(() => {
