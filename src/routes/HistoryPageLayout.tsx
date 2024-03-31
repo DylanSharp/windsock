@@ -1,9 +1,9 @@
 import {Outlet, useLocation, useNavigate, useParams} from "react-router-dom";
 import {Navbar, Page, Segmented, SegmentedButton} from "konsta/react";
 import {IoArrowBack} from "react-icons/io5";
-import {CiViewTable} from "react-icons/ci";
 import {FaChartLine} from "react-icons/fa6";
 import useLocations from "../hooks/use-locations.ts";
+import {LuTable} from "react-icons/lu";
 
 const HistoryPageLayout = () => {
     const {locationId} = useParams();
@@ -42,7 +42,7 @@ const HistoryPageLayout = () => {
                             active={location.pathname.includes("table")}
                             onClick={() => navigate("table")}
                         >
-                            <CiViewTable/>
+                            <LuTable/>
                             <span className="ml-2">Table</span>
                         </SegmentedButton>
                         <SegmentedButton
