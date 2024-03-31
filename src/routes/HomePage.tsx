@@ -12,7 +12,7 @@ const HomePage = () => {
     const navigate = useNavigate();
 
     const navigateToHistoryPage = (location) => {
-        navigate(`/history/${location.uuid}`);
+        navigate(`/history/${location.uuid}/table`);
     }
 
     return (
