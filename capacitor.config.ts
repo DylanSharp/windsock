@@ -7,10 +7,6 @@ const config: CapacitorConfig = {
   server: {
     androidScheme: 'https'
   },
-  // server: {
-  //   url: 'http://192.168.1.103:5173/',
-  //   cleartext: true
-  // },
   plugins: {
     extConfig: {},
     CapacitorUpdater: {

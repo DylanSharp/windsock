@@ -5,6 +5,7 @@ import {Link, useNavigate} from "react-router-dom";
 import NoWindIcon from "../icons/NoWindIcon.tsx";
 import WindsockIcon from "../icons/WindsockIcon.tsx";
 import LoadingSpinner from "../components/LoadingSpinner.tsx";
+import {GiWindsock} from "react-icons/gi";
 
 const HomePage = () => {
     const {data: locations, isLoading} = useLocations();
@@ -19,7 +20,10 @@ const HomePage = () => {
         <Page>
             <Navbar
                 title={(
-                    <h1>Windsock</h1>
+                    <div className="flex space-x-2 items-center">
+                        <GiWindsock className="h-7 w-7"/>
+                        <h1>Windsock</h1>
+                    </div>
                 )}
                 centerTitle={true}
                 bgClassName={"bg-primary-700 rounded-b-xl"}
