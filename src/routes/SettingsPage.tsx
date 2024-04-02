@@ -2,10 +2,29 @@ import {BlockHeader, BlockTitle, List, ListItem, Navbar, Page, Toggle} from "kon
 import useLocations from "../hooks/use-locations.ts";
 import useConfig from "../hooks/use-config.ts";
 import LoadingSpinner from "../components/LoadingSpinner.tsx";
+import {App} from '@capacitor/app';
+import {useEffect, useState} from "react";
+
 
 const SettingsPage = () => {
     const {data: locations} = useLocations();
     const {config, loading, toggleLocationDisplay} = useConfig();
+    const [appVersion, setAppVersion] = useState<string>('');
+
+    useEffect(() => {
+        async function getAppVersion() {
+            try {
+                const info = await App.getInfo();
+                setAppVersion(info.version);
+            } catch (e) {
+                console.error('Failed to get app version', e);
+            }
+        }
+
+        getAppVersion();
+    }, []);
+
+
     return (
         <Page>
             <Navbar
@@ -45,6 +64,10 @@ const SettingsPage = () => {
                     <LoadingSpinner/>
                 </div>
             )}
+            {/* Show version number at the bottom of the page */}
+            <div className="flex-1 flex flex-col justify-center items-end align-bottom pb-5">
+                <span className="text-xs mr-6 text-gray-400">v{appVersion}</span>
+            </div>
         </Page>
     );
 }
