@@ -58,7 +58,7 @@ const Chart = () => {
             height: 310,
             id: 'area-datetime',
             toolbar: {
-                show: true,
+                show: false,
             },
         },
         legend: {
