@@ -4,13 +4,15 @@ import useConfig from "../hooks/use-config.ts";
 import LoadingSpinner from "../components/LoadingSpinner.tsx";
 import {App} from '@capacitor/app';
 import {useEffect, useState} from "react";
+import {CapacitorUpdater} from '@capgo/capacitor-updater';
 
 
 const SettingsPage = () => {
     const {data: locations} = useLocations();
     const {config, loading, toggleLocationDisplay} = useConfig();
-    const [appVersion, setAppVersion] = useState<string>('');
-
+    const [appVersion, setAppVersion] = useState<string>();
+    const [bundleVersion, setBundleVersion] = useState<string>();
+    const [result, setResult] = useState<any>();
     useEffect(() => {
         async function getAppVersion() {
             try {
@@ -18,6 +20,12 @@ const SettingsPage = () => {
                 setAppVersion(info.version);
             } catch (e) {
                 console.error('Failed to get app version', e);
+            }
+
+            const result = await CapacitorUpdater.current();
+            setResult(result);
+            if (result?.native && result?.bundle?.status === 'success') {
+                setBundleVersion(result?.native);
             }
         }
 
@@ -66,7 +74,8 @@ const SettingsPage = () => {
             )}
             {/* Show version number at the bottom of the page */}
             <div className="flex-1 flex flex-col justify-center items-end align-bottom pb-5">
-                <span className="text-xs mr-6 text-gray-400">App version: {appVersion}</span>
+                {appVersion && (<span className="text-xs mr-6 text-gray-400">App v{appVersion}</span>)}
+                {bundleVersion && (<span className="text-xs mr-6 text-gray-400">Bundle v{bundleVersion}</span>)}
             </div>
         </Page>
     );
