@@ -66,7 +66,7 @@ const SettingsPage = () => {
             )}
             {/* Show version number at the bottom of the page */}
             <div className="flex-1 flex flex-col justify-center items-end align-bottom pb-5">
-                <span className="text-xs mr-6 text-gray-400">v{appVersion}</span>
+                <span className="text-xs mr-6 text-gray-400">App version: {appVersion}</span>
             </div>
         </Page>
     );
