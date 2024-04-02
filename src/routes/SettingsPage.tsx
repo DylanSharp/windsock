@@ -12,7 +12,7 @@ const SettingsPage = () => {
     const {config, loading, toggleLocationDisplay} = useConfig();
     const [appVersion, setAppVersion] = useState<string>();
     const [bundleVersion, setBundleVersion] = useState<string>();
-    const [result, setResult] = useState<any>();
+
     useEffect(() => {
         async function getAppVersion() {
             try {
@@ -23,15 +23,13 @@ const SettingsPage = () => {
             }
 
             const result = await CapacitorUpdater.current();
-            setResult(result);
-            if (result?.native && result?.bundle?.status === 'success') {
-                setBundleVersion(result?.native);
+            if (result?.bundle?.version && result?.bundle?.status === 'success') {
+                setBundleVersion(result?.bundle?.version);
             }
         }
 
         getAppVersion();
     }, []);
-
 
     return (
         <Page>
@@ -76,7 +74,6 @@ const SettingsPage = () => {
             <div className="flex-1 flex flex-col justify-center items-end align-bottom pb-5">
                 {appVersion && (<span className="text-xs mr-6 text-gray-400">App v{appVersion}</span>)}
                 {bundleVersion && (<span className="text-xs mr-6 text-gray-400">Bundle v{bundleVersion}</span>)}
-                {result && (<span className="text-xs mr-6 text-gray-400">Result: {JSON.stringify(result, null, 2)}</span>)}
             </div>
         </Page>
     );
