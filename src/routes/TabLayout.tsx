@@ -1,8 +1,7 @@
-import {Icon, Page, Tabbar, TabbarLink,} from 'konsta/react';
+import {Page, Tabbar, TabbarLink,} from 'konsta/react';
 import {GiWindsock} from "react-icons/gi";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {TbSettingsCheck} from "react-icons/tb";
-import useLocations from "../hooks/use-locations.ts";
 
 
 export default function TabLayout() {
@@ -13,13 +12,14 @@ export default function TabLayout() {
     const settingsPageActive = location.pathname === '/settings';
 
     return (
-        <Page>
+        <Page
+        >
             <Outlet/>
             <Tabbar
                 icons
                 className="left-0 bottom-0 fixed text-white"
                 colors={{
-                    bgMaterial: 'bg-primary-700 rounded-t-2xl',
+                    bgMaterial: 'bg-primary-700 rounded-t-2xl'
                 }}
             >
                 <TabbarLink

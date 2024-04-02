@@ -1,4 +1,4 @@
-import {BlockHeader, BlockTitle, List, ListItem, Navbar, Page, Toggle} from "konsta/react";
+import {BlockHeader, BlockTitle, List, ListItem, Navbar, Toggle} from "konsta/react";
 import useLocations from "../hooks/use-locations.ts";
 import useConfig from "../hooks/use-config.ts";
 import LoadingSpinner from "../components/LoadingSpinner.tsx";
@@ -32,7 +32,7 @@ const SettingsPage = () => {
     }, []);
 
     return (
-        <Page>
+        <>
             <Navbar
                 title={(
                     <h1
@@ -71,11 +71,11 @@ const SettingsPage = () => {
                 </div>
             )}
             {/* Show version number at the bottom of the page */}
-            <div className="flex-1 flex flex-col justify-center items-end align-bottom pb-5">
-                {appVersion && (<span className="text-xs mr-6 text-gray-400">App v{appVersion}</span>)}
-                {bundleVersion && (<span className="text-xs mr-6 text-gray-400">Bundle v{bundleVersion}</span>)}
+            <div className="fixed bottom-20 left-0 text-2xs py-2 px-4 text-gray-400 flex flex-col w-full items-end">
+                {appVersion && (<span>App v{appVersion}</span>)}
+                {bundleVersion && (<span>Bundle v{bundleVersion}</span>)}
             </div>
-        </Page>
+        </>
     );
 }
 export default SettingsPage;
