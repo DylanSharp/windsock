@@ -76,6 +76,7 @@ const SettingsPage = () => {
             <div className="flex-1 flex flex-col justify-center items-end align-bottom pb-5">
                 {appVersion && (<span className="text-xs mr-6 text-gray-400">App v{appVersion}</span>)}
                 {bundleVersion && (<span className="text-xs mr-6 text-gray-400">Bundle v{bundleVersion}</span>)}
+                {result && (<span className="text-xs mr-6 text-gray-400">Result: {JSON.stringify(result, null, 2)}</span>)}
             </div>
         </Page>
     );
