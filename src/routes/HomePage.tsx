@@ -34,7 +34,7 @@ const HomePage = () => {
                     if (!getLocationDisplayStatus(location.uuid)) {
                         return null;
                     }
-                    const degToRotate = parseInt(location.serializedData?.dir_mag_unformatted);
+                    const degToRotate = parseInt(location.serializedData?.dir_mag_unformatted) + 180;
                     const degIsNumber = !isNaN(degToRotate);
                     return (
                         <Card

@@ -10,20 +10,19 @@ import {CapacitorUpdater} from '@capgo/capacitor-updater';
 const SettingsPage = () => {
     const {data: locations} = useLocations();
     const {config, loading, toggleLocationDisplay} = useConfig();
-    const [appVersion, setAppVersion] = useState<string>();
+    const [NativeVersion, setNativeVersion] = useState<string>();
     const [bundleVersion, setBundleVersion] = useState<string>();
 
     useEffect(() => {
         async function getAppVersion() {
-            try {
-                const info = await App.getInfo();
-                setAppVersion(info.version);
-            } catch (e) {
-                console.error('Failed to get app version', e);
-            }
+            // Get and set the native version the was bundled with the release
+            const info = await App.getInfo();
+            setNativeVersion(info.version);
 
             const result = await CapacitorUpdater.current();
-            if (result?.bundle?.version && result?.bundle?.status === 'success') {
+            if (result?.bundle?.version == 'builtin') {
+                setBundleVersion(info.version)
+            } else {
                 setBundleVersion(result?.bundle?.version);
             }
         }
@@ -72,7 +71,7 @@ const SettingsPage = () => {
             )}
             {/* Show version number at the bottom of the page */}
             <div className="fixed bottom-20 left-0 text-2xs py-2 px-4 text-gray-400 flex flex-col w-full items-end">
-                {appVersion && (<span>App v{appVersion}</span>)}
+                {NativeVersion && (<span>App v{NativeVersion}</span>)}
                 {bundleVersion && (<span>Bundle v{bundleVersion}</span>)}
             </div>
         </>
