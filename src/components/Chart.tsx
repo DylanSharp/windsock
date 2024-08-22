@@ -1,29 +1,32 @@
 import {ApexOptions} from 'apexcharts';
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import ReactApexChart from 'react-apexcharts';
-import useWeatherDataHistory from "../hooks/use-weather-data-history.ts";
-import {useParams} from "react-router-dom";
-
+import useWeatherDataHistory from '../hooks/use-weather-data-history.ts';
+import {useParams} from 'react-router-dom';
 
 const Chart = () => {
     const {locationId} = useParams();
     const {data} = useWeatherDataHistory(locationId);
-    const [chartData, setChartData] = useState(
-        [
-            {
-                name: 'Windspeed',
-                type: 'area',
-                data: [],
-                stacked: true,
-            },
-            {
-                name: 'Max Windspeed',
-                type: 'area',
-                data: [],
-                stacked: true,
-            }
-        ],
-    );
+    const [chartData, setChartData] = useState([
+        {
+            name: 'Windspeed',
+            type: 'area',
+            data: [],
+            stacked: true,
+        },
+        {
+            name: 'Max Windspeed',
+            type: 'area',
+            data: [],
+            stacked: true,
+        },
+        {
+            name: 'Wind Direction',
+            type: 'line',
+            data: [],
+        },
+    ]);
+
     useEffect(() => {
         if (data) {
             const windspeedData = data.map(dataPoint => {
@@ -38,7 +41,12 @@ const Chart = () => {
                 const maxWindspeed = Number(dataPoint.windspeed_max);
                 return [timeStamp, maxWindspeed];
             });
-            setChartData([
+            const windDirectionData = data.map(dataPoint => {
+                const timeStamp = new Date(dataPoint.last_updated).getTime();
+                const windDirection = Number(dataPoint.dir_mag);
+                return [timeStamp, windDirection];
+            });
+            const newChartData = [
                 {
                     name: 'Windspeed',
                     data: windspeedData,
@@ -46,13 +54,18 @@ const Chart = () => {
                 {
                     name: 'Max Windspeed',
                     data: maxWindspeedData,
-                }
-            ]);
+                },
+                {
+                    name: 'Wind Direction',
+                    data: windDirectionData,
+                },
+            ];
+            setChartData(newChartData);
         }
     }, [data]);
 
     const options: ApexOptions = {
-        colors: ['#0170a3', '#C7D2E2'],
+        colors: ['#0170a3', '#C7D2E2', '#FF5733'], // Added color for wind direction
         chart: {
             fontFamily: 'Satoshi, sans-serif',
             height: 310,
@@ -60,6 +73,8 @@ const Chart = () => {
             toolbar: {
                 show: false,
             },
+            offsetX: 0
+
         },
         legend: {
             show: true,
@@ -94,10 +109,29 @@ const Chart = () => {
                 show: false,
             },
         },
-
+        yaxis: [
+            {
+                show: true,
+                seriesName: 'Windspeed',
+            },
+            {
+                show: false,
+                seriesName: 'Windspeed',
+            },
+            {
+                title: {
+                    text: 'Wind Direction (degrees)',
+                },
+                show: false,
+                seriesName: 'Wind Direction',
+                opposite: true,
+                min: 0,
+                max: 360,
+            },
+        ],
         tooltip: {
             x: {
-                format: 'dd MMM yyyy',
+                format: 'dd MMM yyyy HH:mm',
             },
         },
 
@@ -139,9 +173,7 @@ const Chart = () => {
         <div
             className="col-span-12 rounded-xl border border-stroke bg-white px-5 pb-5 pt-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-7">
             <div>
-                <h4 className="text-title-sm2 font-bold text-black dark:text-white">
-                    Historical Windspeed
-                </h4>
+                <h4 className="text-title-sm2 font-bold text-black dark:text-white">Historical Data</h4>
             </div>
             <div>
                 <div id="chartThirteen" className="-ml-5">
