@@ -2,6 +2,10 @@
 
 A mobile app built with React, Vite, and Capacitor for cross-platform deployment.
 
+<a href="https://play.google.com/store/apps/details?id=com.dmsapps.windsock">
+  <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" width="180"/>
+</a>
+
 ## Tech Stack
 
 ### Frontend
@@ -110,7 +114,3 @@ npx supabase start
 # Apply migrations
 npx supabase db push
 ```
-
-## License
-
-[License information]
